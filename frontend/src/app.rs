@@ -1,5 +1,5 @@
-use yew::prelude::*;
 use web_sys::{console, HtmlInputElement};
+use yew::prelude::*;
 
 #[function_component(App)]
 pub fn app() -> Html {
@@ -31,7 +31,6 @@ pub fn app() -> Html {
             e.prevent_default();
             let username = (*username_value_handle).clone();
             let password = (*password_value_handle).clone();
-            password_value_handle.set("".to_owned());
 
             console::log_1(&format!("username: {username}, password: {password}").into());
         })
