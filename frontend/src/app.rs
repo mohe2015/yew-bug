@@ -3,13 +3,17 @@ use yew::prelude::*;
 
 #[function_component(App)]
 pub fn app() -> Html {
+    console::log_1(&format!("rerender").into());
+
     let username_value_handle = use_state(String::default);
 
     let on_username_change = {
         let username_value_handle = username_value_handle.clone();
 
         Callback::from(move |e: Event| {
-            username_value_handle.set(e.target_dyn_into::<HtmlInputElement>().unwrap().value());
+            let new_username = e.target_dyn_into::<HtmlInputElement>().unwrap().value();
+            console::log_1(&format!("onusernamechange: {new_username}").into());
+            username_value_handle.set(new_username);
         })
     };
 
@@ -19,7 +23,9 @@ pub fn app() -> Html {
         let password_value_handle = password_value_handle.clone();
 
         Callback::from(move |e: Event| {
-            password_value_handle.set(e.target_dyn_into::<HtmlInputElement>().unwrap().value());
+            let new_password = e.target_dyn_into::<HtmlInputElement>().unwrap().value();
+            console::log_1(&format!("onpasswordchange: {new_password}").into());
+            password_value_handle.set(new_password);
         })
     };
 
@@ -32,7 +38,7 @@ pub fn app() -> Html {
             let username = (*username_value_handle).clone();
             let password = (*password_value_handle).clone();
 
-            console::log_1(&format!("username: {username}, password: {password}").into());
+            console::log_1(&format!("submit username: {username}, password: {password}").into());
         })
     };
 
